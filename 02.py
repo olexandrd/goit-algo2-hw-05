@@ -35,17 +35,15 @@ def measure_time(func, data):
 
 def main():
     data = load_data("lms-stage-access.log")
-    # print(count_unique_ip_by_set(data))
-    # print(count_unique_ip_by_hll(data))
-    # print(measure_time(count_unique_ip_by_set, data))
-    # print(measure_time(count_unique_ip_by_hll, data))
     print("Результати порівняння:")
+    set_execution_time = measure_time(count_unique_ip_by_set, data)
+    hll_execution_time = measure_time(count_unique_ip_by_hll, data)
     print(
         "За допомогою множини: кількість унікальних IP -",
         count_unique_ip_by_set(data),
         "шт.",
         "час виконання -",
-        measure_time(count_unique_ip_by_set, data),
+        set_execution_time,
         "сек.",
     )
     print(
@@ -53,7 +51,7 @@ def main():
         count_unique_ip_by_hll(data),
         "шт.",
         "час виконання -",
-        measure_time(count_unique_ip_by_hll, data),
+        hll_execution_time,
         "сек.",
     )
 
